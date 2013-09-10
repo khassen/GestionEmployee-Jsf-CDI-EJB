@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -26,6 +28,10 @@ public class Employe implements Serializable {
     @Size(min = 1, max = 25)
     @Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
 	private String nom;
+
+	@ManyToOne()
+	@JoinColumn(name = "DEPARTMENT_ID")
+	private Department department;
 	
 	private String prenom;
 	
@@ -123,5 +129,15 @@ public class Employe implements Serializable {
 	
 	public String getLabel() {
 		return prenom + " " + nom;
+	}
+
+
+	public Department getDepartment() {
+		return department;
+	}
+
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 }

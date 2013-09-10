@@ -1,7 +1,5 @@
 package fr.treeptik.service.impl;
 
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -10,17 +8,19 @@ import fr.treeptik.model.Employe;
 import fr.treeptik.service.EmployeService;
 
 @Stateless
-public class EmployeServiceImpl implements EmployeService {
+public class EmployeServiceImpl extends GenericServiceImpl<Employe, Integer, EmployeDAO> implements EmployeService {
 
-    @Inject
-    private Logger log;
+//    @Inject
+//    private Logger log;
 
     @Inject
     private EmployeDAO dao;
     
-    @Override
-	public void register(Employe employe) throws Exception {
-        log.info("Registering " + employe.getNom());
-        dao.register(employe);
-    }
+
+
+	@Override
+	protected EmployeDAO getDAO() {
+		
+		return dao;
+	}
 }

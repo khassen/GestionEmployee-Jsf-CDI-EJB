@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
 
 import fr.treeptik.model.Employe;
@@ -19,15 +20,55 @@ public class EmployeManagedBean {
     private EmployeService employeService;
 
     private Employe employe;
+    
+    private ListDataModel<Employe> listDataModel;
 
+//    comme un constructeur permet d'inialiser
     @PostConstruct
     public void init() {
         setEmploye(new Employe());
     }
 
+    
+	// j'ai ma liste qui s'affiche
+	public ListDataModel<Employe> getEmployeList() throws Exception {
+		listDataModel = new ListDataModel<Employe>(employeService.findAll());
+		return listDataModel;
+	}
+    
+	public String deleteEmploye() throws Exception {
+
+		employe = listDataModel.getRowData();
+		employeService.remove(employe.getId());
+		return "listEmploye";
+
+	}
+	
+	public String selectUpdate() throws Exception {
+
+		employe = listDataModel.getRowData();
+		return "updateEmploye";
+
+	}
+	
+	
+	
+	public String updateEmploye() throws Exception{
+
+		
+		getEmployeService().update(employe);
+		listDataModel = new ListDataModel<>();
+		listDataModel.setWrappedData(employeService.findAll());
+
+		return "listEmploye";
+
+	}
+	
+	
+    
     public void register() throws Exception {
         try {
-            employeService.register(getEmploye());
+            employeService.save(getEmploye());
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
             facesContext.addMessage(null, m);
             init();
@@ -36,6 +77,13 @@ public class EmployeManagedBean {
             facesContext.addMessage(null, m);
         }
     }
+    
+    public String findAll() throws Exception{
+    	listDataModel.setWrappedData(employeService.findAll());
+    	return "listEmployes";
+    }
+    
+ 
 
 	public Employe getEmploye() {
 		return employe;
@@ -45,4 +93,26 @@ public class EmployeManagedBean {
 		this.employe = employe;
 	}
 
+
+	public EmployeService getEmployeService() {
+		return employeService;
+	}
+
+
+	public void setEmployeService(EmployeService employeService) {
+		this.employeService = employeService;
+	}
+
+
+	public ListDataModel<Employe> getListDataModel() {
+		return listDataModel;
+	}
+
+
+	public void setListDataModel(ListDataModel<Employe> listDataModel) {
+		this.listDataModel = listDataModel;
+	}
+
+	
+	
 }

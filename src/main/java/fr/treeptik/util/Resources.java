@@ -33,11 +33,13 @@ public class Resources {
     private EntityManager em;
 
     @Produces
+    //InjectionPoint : permet de trouver ou il été injecter le logger partout dans le code
     public Logger produceLog(InjectionPoint injectionPoint) {
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
 
     @Produces
+    //lié à jaxContext: c a d qu il l injecte tout le temps et ou je veux
     @RequestScoped
     public FacesContext produceFacesContext() {
         return FacesContext.getCurrentInstance();

@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/default.xhtml">
+
+	<ui:define name="body">
+		<h1>Index Update Employee</h1>
+
+
+<h:form>
+		<h:inputHidden value="#{employeMB.employe.id}" />
+		<table>
+
+			<tr>
+				<td><h:outputLabel for="name" value="Nom : " /></td>
+				<td><h:inputText id="name" value="#{employeMB.employe.nom}"
+						required="true">
+						<f:validateLength minimum="3" />
+					</h:inputText></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel for="surname" value="Prenom : " /></td>
+				<td><h:inputText id="surname" value="#{employeMB.employe.prenom}">
+						<f:validateLength minimum="3" />
+					</h:inputText></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel for="login" value="Login : " /></td>
+				<td><h:inputText id="login" value="#{employeMB.employe.login}">
+						<f:validateLength minimum="5" />
+					</h:inputText></td>
+			</tr>
+
+
+		<tr>
+				<td><h:outputLabel for="password" value="Password: " /></td>
+				<td><h:inputText id="password" value="#{employeMB.employe.password}">
+						<f:validateLength minimum="5" />
+					</h:inputText></td>
+			</tr>
+		
+
+		</table>
+
+					<f:facet name="header">
+						<h:outputText value="Action" />
+					</f:facet>
+					<h:commandLink id="update" action="#{employeMB.updateEmploye()}"
+						value="Update" />
+		
+
+	</h:form>
+	</ui:define>
+</ui:composition>
