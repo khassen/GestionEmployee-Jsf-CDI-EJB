@@ -6,14 +6,14 @@
 	template="/templates/default.xhtml">
 
 	<ui:define name="body">
-		<h1>Index Employees Create</h1>
+		<h1>Index Product Create</h1>
 		<br />
 		<h:form class="form-horizontal">
 			
 			<div class="form-group">
-				<h:outputLabel for="nom" value="Nom : " styleClass="col-lg-2 control-label"/>
+				<h:outputLabel for="ref" value="Nom : " styleClass="col-lg-2 control-label"/>
 				<div class="col-lg-6">
-					<h:inputText label="Nom" id="nom" value="#{employeMB.employe.nom}" required="true" styleClass="form-control">
+					<h:inputText label="ref" id="ref" value="#{employeMB.employe.nom}" required="true" styleClass="form-control">
 						<f:validateLength minimum="5" />
 					</h:inputText>
 				</div>

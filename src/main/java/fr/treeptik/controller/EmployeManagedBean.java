@@ -19,16 +19,20 @@ public class EmployeManagedBean {
     @Inject
     private EmployeService employeService;
 
+
+    
     private Employe employe;
     
     private ListDataModel<Employe> listDataModel;
 
-//    comme un constructeur permet d'inialiser
+//    comme un constructeur permet d'initialiser
     @PostConstruct
     public void init() {
         setEmploye(new Employe());
     }
 
+
+    
     
 	// j'ai ma liste qui s'affiche
 	public ListDataModel<Employe> getEmployeList() throws Exception {
@@ -37,7 +41,6 @@ public class EmployeManagedBean {
 	}
     
 	public String deleteEmploye() throws Exception {
-
 		employe = listDataModel.getRowData();
 		employeService.remove(employe.getId());
 		return "listEmploye";
@@ -66,7 +69,7 @@ public class EmployeManagedBean {
 	
 	
     
-    public void register() throws Exception {
+    public String register() throws Exception {
         try {
             employeService.save(getEmploye());
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
@@ -76,6 +79,7 @@ public class EmployeManagedBean {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getLocalizedMessage(), "Registration unsuccessful");
             facesContext.addMessage(null, m);
         }
+        return "listDepartment";
     }
     
     public String findAll() throws Exception{
@@ -113,6 +117,5 @@ public class EmployeManagedBean {
 		this.listDataModel = listDataModel;
 	}
 
-	
 	
 }

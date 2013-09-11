@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -23,6 +22,8 @@ public class Department implements Serializable{
 
 
 	private String name;
+	
+	private String number;
 	
 	@OneToMany(mappedBy="department")
 	List<Employe> employees;
@@ -85,6 +86,18 @@ public class Department implements Serializable{
 
 	public void setEmployees(List<Employe> employees) {
 		this.employees = employees;
+	}
+
+
+
+	public String getNumber() {
+		return number;
+	}
+
+
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 	
 	

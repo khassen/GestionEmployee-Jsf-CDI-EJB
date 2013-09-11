@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/default.xhtml">
+
+	<ui:define name="body">
+		<h1>Index Update Department</h1>
+
+
+		<h:form>
+			<h:inputHidden value="#{departmentMB.department.id}" />
+			<table>
+
+				<tr>
+					<td><h:outputLabel for="name" value="Nom : " /></td>
+					<td><h:inputText id="name"
+							value="#{departmentMB.department.name}" required="true">
+							<f:validateLength minimum="3" />
+						</h:inputText></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="surname" value="Prenom : " /></td>
+					<td><h:inputText id="surname"
+							value="#{departmentMB.department.number}">
+							<f:validateLength minimum="2" />
+						</h:inputText></td>
+				</tr>
+				<tr style="FONT-FAMILY: 'Bitstream Charter';">
+					<td>
+
+
+					
+						<f:facet name="header">
+						</f:facet>
+						<h:commandButton action="#{departmentMB.updateDepartment()}"
+							value="Update" styleClass="btn success" />
+
+					</td>
+				</tr>
+			</table>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
