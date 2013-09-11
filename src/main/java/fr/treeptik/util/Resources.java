@@ -25,8 +25,10 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import fr.treeptik.clientservice.wsimport.Weather;
-import fr.treeptik.clientservice.wsimport.WeatherSoap;
+import fr.treeptik.clientservice.wsimportamazone.AWSECommerceService;
+import fr.treeptik.clientservice.wsimportamazone.AWSECommerceServicePortType;
+import fr.treeptik.clientservice.wsimportmeteo.Weather;
+import fr.treeptik.clientservice.wsimportmeteo.WeatherSoap;
 
 
 public class Resources {
@@ -55,6 +57,14 @@ public class Resources {
     	WeatherSoap weatherSaop = service.getWeatherSoap();
     	return weatherSaop;
     	
+    }
+    
+    @Produces
+    @RequestScoped
+    public AWSECommerceServicePortType getAWSECommerceServicePortType(){
+    	AWSECommerceService aWSECommerceService = new AWSECommerceService();
+    	AWSECommerceServicePortType awseCommerceServicePortType = aWSECommerceService.getAWSECommerceServicePort();
+        return awseCommerceServicePortType;
     }
 
 }
